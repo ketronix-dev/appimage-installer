@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppImage Installer", "AppImage Installer.csproj", "{F56A76DF-F9D9-4E7E-9FB3-DF4294BDAB26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppImage Installer", "app.csproj", "{F56A76DF-F9D9-4E7E-9FB3-DF4294BDAB26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
