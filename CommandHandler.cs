@@ -8,7 +8,7 @@ namespace AppImage_Installer
 {
     internal class CommandHandlers
     {
-        internal static async void HandleInstall(InstallVerb installVerb)
+        internal static async Task HandleInstall(InstallVerb installVerb)
         {
             Console.WriteLine($"Install app: {installVerb.App}");
             if(File.Exists(installVerb.App))
@@ -65,7 +65,7 @@ namespace AppImage_Installer
                 Environment.Exit(0);
             }
         }
-        internal static async void HandleSearch(SearchVerb searchVerb)
+        internal static async Task HandleSearch(SearchVerb searchVerb)
         {
             Console.WriteLine($"Search app: {searchVerb.App}");
             Service.SearchAppInCloudRepo(searchVerb.App);
@@ -78,7 +78,7 @@ namespace AppImage_Installer
         {
             Service.UpdateLocalRepoBase();
         }
-        internal static async void HandleUpgrade(UpgradeVerb upgradeVerb)
+        internal static async Task HandleUpgrade(UpgradeVerb upgradeVerb)
         {
             await Service.UpgradeAllApp();
         }

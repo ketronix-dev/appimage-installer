@@ -15,12 +15,12 @@ namespace AppImage_Installer
                     UpgradeVerb,
                     SearchVerb
                 >(args)
-                .WithParsed<InstallVerb>(CommandHandlers.HandleInstall)
                 .WithParsed<RemoveVerb>(CommandHandlers.HandleRemove)
                 .WithParsed<ListVerb>(CommandHandlers.HandleList)
                 .WithParsed<UpdateVerb>(CommandHandlers.HandleUpdate)
-                .WithParsed<SearchVerb>(CommandHandlers.HandleSearch)
-                .WithParsed<UpgradeVerb>(CommandHandlers.HandleUpgrade);
+                .WithParsedAsync<SearchVerb>(CommandHandlers.HandleSearch).Result
+                .WithParsedAsync<InstallVerb>(CommandHandlers.HandleInstall).Result
+                .WithParsedAsync<UpgradeVerb>(CommandHandlers.HandleUpgrade);
         }
     }
 }
