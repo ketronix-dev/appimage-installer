@@ -13,10 +13,7 @@ namespace AppImage_Installer
             Console.WriteLine($"Install app: {installVerb.App}");
             if(File.Exists(installVerb.App))
             {
-                Console.Write("Confirm the installation of this package: [Y|n] ");
-                string read = Console.ReadLine();
-
-                if(ProgramEnvironment.AskAccept())
+                if(ProgramEnvironment.AskAccept("install", "package"))
                 {
                     var ufi = new UnixFileInfo(installVerb.App);
                     ufi.FileAccessPermissions |= FileAccessPermissions.UserExecute;
@@ -54,7 +51,7 @@ namespace AppImage_Installer
         {
             Console.WriteLine($"Remove app: {removeVerb.App}");
             
-            if(ProgramEnvironment.AskAccept())
+            if(ProgramEnvironment.AskAccept("remove", "package"))
             {
                 Console.WriteLine("Begin removing app...".Pastel("#42f569"));
                 Integrate.RemoveApp(removeVerb.App);

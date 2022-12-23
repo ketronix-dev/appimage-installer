@@ -24,7 +24,6 @@ public class Integrate
         catch (System.Exception)
         {
             Console.WriteLine("File execution error, try installing libfuse, or update libappimage");
-            System.Environment.Exit(1);
         }
         var squashfsRoot = $"{Environment.CurrentDirectory}/squashfs-root";
 
@@ -52,9 +51,17 @@ public class Integrate
         Console.WriteLine("Checking directories...".Pastel("#1f7d34"));
 
         Console.WriteLine("Copying files...".Pastel("#1f7d34"));
-        
-        File.Copy(pngfiles[0], copyPngTo, true);
-        File.Copy(pathToAppImage, copyAppImageTo, true);
+
+        try
+        {
+            File.Copy(pngfiles[0], copyPngTo, true);
+            File.Copy(pathToAppImage, copyAppImageTo, true);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error: {e.Message}");
+            Environment.Exit(1);
+        }
 
         Console.WriteLine("Creating a \".desktop\" file...".Pastel("#1f7d34"));
         

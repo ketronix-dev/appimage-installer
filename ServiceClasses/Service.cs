@@ -67,8 +67,31 @@ namespace ServiceClasses
             var dest = $"{userHome}/.local/share/apps/cache/app.AppImage";
             
             ProgramEnvironment.ShowAppInfo(appToInstall, update);
-            
-            if(ProgramEnvironment.AskAccept())
+
+            if (update != true)
+            {
+                if (ProgramEnvironment.AskAccept("install", "package") && update == false)
+                {
+                    Console.WriteLine("Begin downloading...".Pastel("#42f569"));
+                    await Service.DownloadAsync(appToInstall.Link, dest);
+                    Console.WriteLine("\n \n");
+                    Console.WriteLine("Enable permissions...".Pastel("#42f569"));
+
+                    var ufi = new UnixFileInfo(dest);
+                    ufi.FileAccessPermissions |= FileAccessPermissions.UserExecute;
+
+                    Console.WriteLine("Begin installing...".Pastel("#42f569"));
+                    Integrate.InstallApp(dest, appToInstall.Version);
+                    Console.WriteLine("Done".Pastel("#42f569"));
+                    File.Delete(dest);
+                    Console.CursorVisible = true;
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
+            }
+            else
             {
                 Console.WriteLine("Begin downloading...".Pastel("#42f569"));
                 await Service.DownloadAsync(appToInstall.Link, dest);
@@ -77,16 +100,12 @@ namespace ServiceClasses
 
                 var ufi = new UnixFileInfo(dest);
                 ufi.FileAccessPermissions |= FileAccessPermissions.UserExecute;
-                                    
+
                 Console.WriteLine("Begin installing...".Pastel("#42f569"));
                 Integrate.InstallApp(dest, appToInstall.Version);
                 Console.WriteLine("Done".Pastel("#42f569"));
                 File.Delete(dest);
                 Console.CursorVisible = true;
-            }
-            else
-            {
-                Environment.Exit(0);
             }
         }
 
@@ -116,7 +135,7 @@ namespace ServiceClasses
                 }
                 Console.WriteLine("-------------------------------");
                 
-                if(ProgramEnvironment.AskAccept())
+                if(ProgramEnvironment.AskAccept("upgrade", "packages"))
                 {
                     foreach (var name in AppsToUpdate)
                     {

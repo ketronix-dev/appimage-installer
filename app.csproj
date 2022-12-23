@@ -7,6 +7,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>app</AssemblyName>
+        <Version>2.0.1</Version>
+        <Authors>Artem Dadashjants (ketronix-dev)</Authors>
     </PropertyGroup>
 
     <ItemGroup>

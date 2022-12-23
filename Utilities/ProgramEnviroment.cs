@@ -46,9 +46,9 @@ namespace Utilities
             Console.WriteLine("-------------------------------");
         }
 
-        public static bool AskAccept()
+        public static bool AskAccept(string state, string package)
         {
-            Console.Write("Confirm the installation of this package: [Y|n] ");
+            Console.Write($"Confirm the {state} of this {package}: [Y|n] ");
             string read = Console.ReadLine();
             if(read == "y" || read == "Y")
             {
